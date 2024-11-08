@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize')
-const {sequelize} = require('../Config/dbConfig')
+const {dbConfig} = require('../Config')
 
-const playerClubSeasonModel = sequelize.define('PlayerClubSeason', {
+const playerClubSeasonModel = dbConfig.sequelize.define('PlayerClubSeason', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -68,11 +68,11 @@ const playerClubSeasonModel = sequelize.define('PlayerClubSeason', {
     },
     club_position: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     club_jersey_number: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     club_loaned_from: {
         type: DataTypes.STRING,
@@ -119,7 +119,7 @@ const playerClubSeasonModel = sequelize.define('PlayerClubSeason', {
         allowNull: false
     },
     release_clause: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true
     },
     player_tags: {
@@ -142,7 +142,7 @@ const playerClubSeasonModel = sequelize.define('PlayerClubSeason', {
     timestamps: false,
     indexes: [
         {
-            fields: ['Player_id', 'FifaVersionId', "ClubId"],
+            fields: ['PlayerId', 'FifaVersionId', "ClubId"],
             unique: true,
             name: 'player_club_season_unique_key'
         }

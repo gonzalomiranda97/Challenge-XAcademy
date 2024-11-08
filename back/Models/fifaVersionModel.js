@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize')
-const {sequelize} = require('../Config/dbConfig')
+const {dbConfig} = require('../Config')
 
-const fifaVersionModel = sequelize.define('FifaVersion', {
+const fifaVersionModel = dbConfig.sequelize.define('FifaVersion', {
     year: {
         type: DataTypes.INTEGER,
         allowNull: false,

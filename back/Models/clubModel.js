@@ -1,18 +1,18 @@
 const {DataTypes} = require('sequelize')
-const {sequelize} = require('../Config/dbConfig')
+const {dbConfig} = require('../Config')
 
-const clubModel = sequelize.define('Club', {
+const clubModel = dbConfig.sequelize.define('Club', {
     league_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     league_name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     league_level: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     club_id: {
         type: DataTypes.INTEGER,
@@ -22,7 +22,7 @@ const clubModel = sequelize.define('Club', {
     },
     club_name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     }
 }, {
     timestamps: false
