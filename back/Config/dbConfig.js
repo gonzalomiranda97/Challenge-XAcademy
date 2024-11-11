@@ -12,6 +12,7 @@ const initDB = async () => {
         await sequelize.authenticate().then(
             console.log('Se conectó a la base de datos!')
         )
+        await sequelize.sync({force: false})
     } catch (error) {
         console.log('Error al conectarse a la base de datos.', error)
     }

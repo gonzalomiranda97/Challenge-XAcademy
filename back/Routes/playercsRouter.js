@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-const {playerController} = require('../Controllers')
+const {playercsController} = require('../Controllers')
 
-router.get('/:id', playerController.getPlayerCSById)
-router.get('/playerid/:id', playerController.getPlayerCSByPlayerId)
-router.get('/clubid/:id', playerController.getPlayerCSByClubId)
+router.get('/:id', playercsController.getPlayerCSById)
+router.get('/playerid/:id', playercsController.getPlayerCSByPlayerId)
+router.get('/clubid/:id', playercsController.getPlayerCSByClubId)
 
 module.exports = router

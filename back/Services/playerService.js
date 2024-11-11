@@ -1,11 +1,11 @@
-const {clubModel} = require('../Models')
+const {playerModel} = require('../Models')
 const {Op} = require('sequelize')
 
-const getClubByName = async (name) => {
+const getPlayerByName = async (name) => {
     try {
-        const findClub = await clubModel.findAll({
+        const findPlayer = await playerModel.findAll({
             where: {
-                club_name: {
+                long_name: {
                     [Op.like]: `%${name}%`
                 }
             },
@@ -13,16 +13,16 @@ const getClubByName = async (name) => {
                 all: true
             }
         })
-        if (findClub.length === 0) {
+        if (findPlayer.length === 0) {
             const error = new Error()
-            error.message = `Error al encontrar club con nombre=${name}`
+            error.message = `Error al encontrar player con nombre=${name}`
             error.statusCode = 404
             throw error
         }
-        return findClub
+        return findPlayer
     } catch (error) {
         throw error
     }
 }
 
-module.exports = {getClubByName}
+module.exports = {getPlayerByName}

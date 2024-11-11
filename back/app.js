@@ -3,7 +3,7 @@ const app = express()
 
 const PORT = 3000
 const {dbConfig} = require('./Config')
-const {playercsRouter, clubRouter, fifaVersionRouter} = require('./Routes')
+const {playercsRouter, clubRouter, fifaVersionRouter, playerRouter, userRouter, loginRouter} = require('./Routes')
 const {errorMiddle} = require('./Middlewares')
 
 app.get('/', (req, res) => {
@@ -21,3 +21,6 @@ app.use(errorMiddle)
 app.use('/api/playercs', playercsRouter)
 app.use('/api/club', clubRouter)
 app.use('/api/fifaversion', fifaVersionRouter)
+app.use('/api/player', playerRouter)
+app.use('/api/user', userRouter)
+app.use('/api/login', loginRouter)

@@ -2,6 +2,7 @@ const playerModel = require('./playerModel')
 const fifaVersionModel = require('./fifaVersionModel')
 const clubModel = require('./clubModel')
 const playerClubSeasonModel = require('./playerClubSeasonModel')
+const userModel = require('./userModel')
 
 playerModel.hasMany(playerClubSeasonModel, {foreignKey: 'PlayerId'})
 playerClubSeasonModel.belongsTo(playerModel, {foreignKey: 'PlayerId'})
@@ -12,4 +13,4 @@ playerClubSeasonModel.belongsTo(fifaVersionModel, {foreignKey: 'FifaVersionId'})
 clubModel.hasMany(playerClubSeasonModel, {foreignKey: 'ClubId'})
 playerClubSeasonModel.belongsTo(clubModel, {foreignKey: 'ClubId'})
 
-module.exports = {playerModel, fifaVersionModel, clubModel, playerClubSeasonModel}
+module.exports = {playerModel, fifaVersionModel, clubModel, playerClubSeasonModel, userModel}
