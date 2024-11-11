@@ -5,6 +5,7 @@ const PORT = 3000
 const {dbConfig} = require('./Config')
 const {playercsRouter, clubRouter, fifaVersionRouter, playerRouter, userRouter, loginRouter} = require('./Routes')
 const {errorMiddle} = require('./Middlewares')
+const cors = require('cors')
 
 app.get('/', (req, res) => {
     res.send('Hola mundo!')
@@ -17,6 +18,7 @@ app.listen(PORT, async () => {
 
 app.use(express.json())
 app.use(errorMiddle)
+app.use(cors())
 
 app.use('/api/playercs', playercsRouter)
 app.use('/api/club', clubRouter)

@@ -14,7 +14,11 @@ const login = async (email, password) => {
                         role: 'admin'
                     }, secret, {})
                     console.log('Se creó token de administrador!')
-                    return token
+                    return {
+                        username: findUser.username,
+                        email: findUser.email,
+                        token: token
+                    }
                 }
                 else {
                     const token = jwt.sign({
@@ -22,7 +26,11 @@ const login = async (email, password) => {
                         role: 'user'
                     }, secret, {})
                     console.log('Se creó token de usuario!')
-                    return token
+                    return {
+                        username: findUser.username,
+                        email: findUser.email,
+                        token: token
+                    }
                 }
             } else {
                 const error = new Error()
