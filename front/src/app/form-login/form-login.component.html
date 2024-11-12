@@ -1,6 +1,7 @@
 <div>
   @if (this.isLogged) {
-    <p>Actualmente logueado como: <span class="user">{{this.getCurrentUser().username}}</span></p>
+    <p>Actualmente logueado como: <span class="user">{{this.getCurrentUser()?.username}}</span></p>
+    <button class="button-logout" (click)="logOut()">Logout</button>
   }
   @if (!this.showSignUp) {
     <form [formGroup]="loginForm" (ngSubmit)="login()" class="form">
@@ -47,6 +48,9 @@
           <input type="password" class="input" placeholder="Ingrese su contraseña" id="password" formControlName="password">
         </div>
       <button type="submit" class="button-submit">Crear usuario</button>
+      @if (this.userCreated) {
+        <p class="p user-created">Usuario creado!</p>
+      }
       <p class="p">Ya tienes usuario? <span class="span" (click)="this.showSignUpForm(false)">Ingresá!</span></p>
     </form>
   }

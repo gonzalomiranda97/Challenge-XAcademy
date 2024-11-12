@@ -1,0 +1,50 @@
+<div>
+    <div class="container flex">
+        <form [formGroup]="searchByPlayerCSIdForm" (ngSubmit)="searchByPlayerCSId(this.searchByPlayerCSIdForm.controls.id.value!)">
+            <div>
+                <input type="text" class="input" placeholder="PlayerClubSeasonId" formControlName="id">
+                <button type="submit" class="search">Buscar</button>
+            </div>
+        </form>
+    </div>
+    <div class="container">
+        <div class="table-container">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>PlayerId</td>
+                        <td>FifaVersionId</td>
+                        <td>ClubId</td>
+                        <td>Name</td>
+                        <td>Club Name</td>
+                        <td>Club Jersey Number</td>
+                        <td>Positions</td>
+                        <td>Nationality</td>
+                        <td>Overall</td>
+                        <td>Potential</td>
+                        <td>Age</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (playercs of this.playerCSCollection ;track $index) {
+                    <tr>
+                        <td>{{playercs.id}}</td>
+                        <td>{{playercs.PlayerId}}</td>
+                        <td>{{playercs.FifaVersionId}}</td>
+                        <td>{{playercs.ClubId}}</td>
+                        <td>{{playercs.Player.short_name}}</td>
+                        <td>{{playercs.Club.club_name}}</td>
+                        <td>{{playercs.club_jersey_number}}</td>
+                        <td>{{playercs.player_positions}}</td>
+                        <td>{{playercs.Player.nationality_name}}</td>
+                        <td>{{playercs.overall}}</td>
+                        <td>{{playercs.potential}}</td>
+                        <td>{{playercs.age}}</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

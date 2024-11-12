@@ -1,4 +1,9 @@
 <div>
     <h1>Bienvenido!</h1>
-    <p>Crea un usuario e ingresa para interactuar con la base de datos!</p>
+    @if (user) {
+        <p>dashboard</p>
+        <app-dashboard></app-dashboard>
+    } @else {
+        <p>Crea un usuario e ingresa para interactuar con la base de datos!</p>
+    }
 </div>

@@ -1,0 +1,154 @@
+.container {
+    margin-top: 10px;
+    background-color: rgb(40, 40, 40);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.flex {
+    display: flex;
+}
+
+.input {
+    border: 1px solid white;
+    width: 15em;
+    height: 2.5em;
+    padding-left: 0.8em;
+    outline: none;
+    overflow: hidden;
+    background-color: rgb(15, 15, 15);
+    border-radius: 10px;
+    transition: all 0.5s;
+    color: white
+  }
+  
+.input:hover,
+.input:focus {
+    border: 1px solid goldenrod;
+    box-shadow: 0px 0px 0px 3px rgba(218, 215, 7, 0.3);
+    background-color: rgb(25, 25, 25);
+}
+
+.search {
+    margin-left: 10px;
+    width: 5em;
+    height: 2.5em;
+    background-color: rgb(15, 15, 15);
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white
+}
+
+.search:hover {
+    border: 1px solid goldenrod;
+    box-shadow: 0px 0px 0px 3px rgba(218, 215, 7, 0.3);
+    background-color: rgb(25, 25, 25);
+}
+
+/* .table-container {
+    width: 100%;
+    overflow-x: auto;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: rgb(25, 25, 25);
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    color: white;
+    table-layout: fixed;
+}
+
+.styled-table thead, .styled-table tbody {
+    display: block;
+    width: 100%;
+}
+
+.styled-table thead tr {
+    background-color: goldenrod;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid white;
+}
+
+.styled-table tbody tr:hover {
+    background-color: rgb(50, 50, 50);
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: rgb(35, 35, 35);
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid goldenrod;
+} */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Habilitar scroll horizontal en el contenedor */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: rgb(25, 25, 25);
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+    color: white;
+    table-layout: fixed; /* Ajusta el ancho de las columnas */
+}
+
+.styled-table thead, .styled-table tbody {
+    display: block; /* Permitir el scroll vertical solo en tbody */
+    width: 100%;
+}
+
+.styled-table thead {
+    background-color: goldenrod;
+    color: white;
+    font-weight: bold;
+}
+
+.styled-table thead tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.styled-table tbody {
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.styled-table th, .styled-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid white;
+    text-align: left;
+}
+
+.styled-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.styled-table tbody tr:hover {
+    background-color: rgb(50, 50, 50);
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: rgb(35, 35, 35);
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid goldenrod;
+}

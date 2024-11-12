@@ -9,11 +9,7 @@ import { lastValueFrom, take} from 'rxjs';
 })
 export class LoginService {
 
-    currentUser: User = {
-        username: 'valor predeterminado desde service',
-        email: 'valor predeterminado desde service',
-        token: 'valor predeterminado desde service'
-    }
+    currentUser: User | null = null
 
     isLogged: boolean = false;
 
@@ -25,9 +21,13 @@ export class LoginService {
         return this.currentUser
     }
 
-    setCurrentUser(user: User) {
+    setCurrentUser(user: User | null) {
         this.currentUser = user
-        this.setIsLogged(true)
+        if (this.currentUser?.token) {
+            this.setIsLogged(true)
+        } else {
+            this.setIsLogged(false)
+        }
     }
     
     private setIsLogged(bool: boolean) {
@@ -63,7 +63,7 @@ export class LoginService {
         }
     }
 
-    
+
 
 
 }

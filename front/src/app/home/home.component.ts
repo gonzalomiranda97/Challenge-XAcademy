@@ -1,12 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../../services/login.service';
+import { User } from '../../types';
+import { DashboardComponent } from "../dashboard/dashboard.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [DashboardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+
+  user: User | null = null
+
+  constructor(private loginService: LoginService) {
+
+  }
+
+  ngOnInit(): void {
+    console.log('Se creo el componente home')
+    this.user = this.loginService.getCurrentUser()
+
+  }
 
 }
