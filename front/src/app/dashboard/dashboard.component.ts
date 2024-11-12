@@ -2,15 +2,19 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { PlayerCS } from '../../types';
 import { DashboardService } from '../../services/dashboard.service';
+import { PlayerDetailsComponent } from '../player-details/player-details.component';
+import { PlayerDetailsService } from '../../services/playerDetails.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PlayerDetailsComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
+
+  selectedPlayer: PlayerCS | null = null
 
   playerCSCollection: PlayerCS[] = []
 
@@ -18,7 +22,7 @@ export class DashboardComponent {
     id: new FormControl('')
   })
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService, private playerDetailsService: PlayerDetailsService) {
 
   }
 
@@ -30,4 +34,11 @@ export class DashboardComponent {
       this.playerCSCollection.push(data)
     })
   }
+
+  selectPlayer(player: PlayerCS) {
+    this.selectedPlayer = player
+    this.playerDetailsService.selectPlayer(player)
+  }
+
+  
 }

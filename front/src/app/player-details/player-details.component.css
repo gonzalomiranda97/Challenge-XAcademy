@@ -1,0 +1,32 @@
+ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    list-style-type: none;
+    padding: 5;
+}
+
+li {
+    background-color: rgb(35, 35, 35); /* Color de fondo para cada ítem */
+    padding: 8px;
+    border-radius: 5px;
+}
+
+li:hover {
+    background-color: rgb(55, 55, 55);
+    border-color: goldenrod;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+}
+
+li b {
+    color: goldenrod
+}
+
+img {
+    padding: 3px;
+    border-radius: 50px;
+}

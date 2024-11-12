@@ -43,52 +43,8 @@
     border: 1px solid goldenrod;
     box-shadow: 0px 0px 0px 3px rgba(218, 215, 7, 0.3);
     background-color: rgb(25, 25, 25);
+    color: goldenrod
 }
-
-/* .table-container {
-    width: 100%;
-    overflow-x: auto;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: rgb(25, 25, 25);
-}
-
-.styled-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 16px;
-    color: white;
-    table-layout: fixed;
-}
-
-.styled-table thead, .styled-table tbody {
-    display: block;
-    width: 100%;
-}
-
-.styled-table thead tr {
-    background-color: goldenrod;
-    color: white;
-    text-align: left;
-    font-weight: bold;
-}
-
-.styled-table th, .styled-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid white;
-}
-
-.styled-table tbody tr:hover {
-    background-color: rgb(50, 50, 50);
-}
-
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: rgb(35, 35, 35);
-}
-
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid goldenrod;
-} */
 
 .table-container {
     width: 100%;
@@ -124,7 +80,7 @@
 }
 
 .styled-table tbody {
-    max-height: 200px;
+    max-height: 300px;
     overflow-y: auto;
     width: 100%;
 }

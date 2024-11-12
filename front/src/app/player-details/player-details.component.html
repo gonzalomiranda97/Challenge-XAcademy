@@ -1,0 +1,97 @@
+<div>
+    @if (player) {
+        <h2>Detalles del jugador:</h2>
+        <ul>
+            <li class="flex"><img src="{{player.player_face_url}}"></li>
+            <li><b>Id: </b>{{player.id}}</li>
+            <li><b>Versión de fifa: </b>{{player.FifaVersionId}}</li>
+            <li><b>Id del jugador: </b>{{player.PlayerId}}</li>
+            <li><b>Nombre corto: </b>{{player.Player.short_name}}</li>
+            <li><b>Nombre completo: </b>{{player.Player.long_name}}</li>
+            <li><b>Id de club: </b>{{player.ClubId}}</li>
+            <li><b>Nombre de club: </b>{{player.Club.club_name}}</li>
+            <li><b>Id de liga: </b>{{player.Club.league_id}}</li>
+            <li><b>Nombre de liga: </b>{{player.Club.league_name}}</li>
+            <li><b>Nivel de liga: </b>{{player.Club.league_level}}</li>
+            <li><b>Posiciones: </b>{{player.player_positions}}</li>
+            <li><b>Overall: </b>{{player.overall}}</li>
+            <li><b>Potential: </b>{{player.potential}}</li>
+            <li><b>Valor: </b>{{player.value}}</li>
+            <li><b>Salario: </b>{{player.wage}}</li>
+            <li><b>Edad: </b>{{player.age}}</li>
+            <li><b>Altura: </b>{{player.height}}</li>
+            <li><b>Peso: </b>{{player.weight}}</li>
+            <li><b>Posicion en club: </b>{{player.club_position}}</li>
+            <li><b>Número de camiseta en club: </b>{{player.club_jersey_number}}</li>
+            <li><b>Cedido desde: </b>{{player.club_loaned_from}}</li>
+            <li><b>Fecha de incorporación: </b>{{player.club_joined_date}}</li>
+            <li><b>Vencimiento contrato: </b>{{player.club_contract_until_year}}</li>
+            <li><b>Posición en club: </b>{{player.nation_position}}</li>
+            <li><b>Número de camiseta en selección: </b>{{player.nation_jersey_number}}</li>
+            <li><b>Pie débil: </b>{{player.weak_foot}}</li>
+            <li><b>Habilidades: </b>{{player.skill_moves}}</li>
+            <li><b>Reputación internacional: </b>{{player.international_reputation}}</li>
+            <li><b>Ritmo: </b>{{player.work_rate}}</li>
+            <li><b>Tipo de cuerpo: </b>{{player.body_type}}</li>
+            <li><b>Cara real: </b>{{player.real_face}}</li>
+            <li><b>Cláusula de rescision: </b>{{player.release_clause}}</li>
+            <li><b>Tags: </b>{{player.player_tags}}</li>
+            <li><b>Rasgos: </b>{{player.player_traits}}</li>
+            <li><b>Id de nacionalidad: </b>{{player.Player.nationality_id}}</li>
+            <li><b>Nacionalidad: </b>{{player.Player.nationality_name}}</li>
+            <li><b>Fecha de nacimiento: </b>{{player.Player.birth_date}}</li>
+            <li><b>Pie preferido: </b>{{player.Player.preferred_foot}}</li>
+            <li (click)="this.showStats()"><b>Mostrar estadísticas</b></li>
+        </ul>
+    } @else {
+        <h3>No hay un jugador seleccionado aún. Apretá en alguno!</h3>
+    }
+    @if (this.viewStats) {
+        <h2>Estadísticas del jugador: </h2>
+        <ul>
+            <li><b>Ritmo: </b>{{player?.player_stats?.pace}}</li>
+            <li><b>Físico: </b>{{player?.player_stats?.physic}}</li>
+            <li><b>Pase: </b>{{player?.player_stats?.passing}}</li>
+            <li><b>Tiro: </b>{{player?.player_stats?.shooting}}</li>
+            <li><b>Defensa: </b>{{player?.player_stats?.defending}}</li>
+            <li><b>Dribbling: </b>{{player?.player_stats?.dribbling}}</li>
+            <li><b>Curva: </b>{{player?.player_stats?.skill_curve}}</li>
+            <li><b>Salto: </b>{{player?.player_stats?.power_jumping}}</li>
+            <li><b>Resistencia: </b>{{player?.player_stats?.power_stamina}}</li>
+            <li><b>Fuerza: </b>{{player?.player_stats?.power_strength}}</li>
+            <li><b>Habilidad Dribbling: </b>{{player?.player_stats?.skill_dribbling}}</li>
+            <li><b>Visión: </b>{{player?.player_stats?.mentality_vision}}</li>
+            <li><b>Agilidad: </b>{{player?.player_stats?.movement_agility}}</li>
+            <li><b>Balance: </b>{{player?.player_stats?.movement_balance}}</li>
+            <li><b>Tiro de Larga Distancia: </b>{{player?.player_stats?.power_long_shots}}</li>
+            <li><b>Potencia del Disparo: </b>{{player?.player_stats?.power_shot_power}}</li>
+            <li><b>Voleas: </b>{{player?.player_stats?.attacking_volleys}}</li>
+            <li><b>Velocidad del Portero: </b>{{player?.player_stats?.goalkeeping_speed}}</li>
+            <li><b>Precisión de Tiros Libres: </b>{{player?.player_stats?.skill_fk_accuracy}}</li>
+            <li><b>Centros: </b>{{player?.player_stats?.attacking_crossing}}</li>
+            <li><b>Paradas del Portero: </b>{{player?.player_stats?.goalkeeping_diving}}</li>
+            <li><b>Reacciones: </b>{{player?.player_stats?.movement_reactions}}</li>
+            <li><b>Control del Balón: </b>{{player?.player_stats?.skill_ball_control}}</li>
+            <li><b>Pase Largo: </b>{{player?.player_stats?.skill_long_passing}}</li>
+            <li><b>Definición: </b>{{player?.player_stats?.attacking_finishing}}</li>
+            <li><b>Saques del Portero: </b>{{player?.player_stats?.goalkeeping_kicking}}</li>
+            <li><b>Calma: </b>{{player?.player_stats?.mentality_composure}}</li>
+            <li><b>Penales: </b>{{player?.player_stats?.mentality_penalties}}</li>
+            <li><b>Manejo del Portero: </b>{{player?.player_stats?.goalkeeping_handling}}</li>
+            <li><b>Reflejos del Portero: </b>{{player?.player_stats?.goalkeeping_reflexes}}</li>
+            <li><b>Agresividad: </b>{{player?.player_stats?.mentality_aggression}}</li>
+            <li><b>Posicionamiento: </b>{{player?.player_stats?.mentality_positioning}}</li>
+            <li><b>Aceleración: </b>{{player?.player_stats?.movement_acceleration}}</li>
+            <li><b>Velocidad de Sprint: </b>{{player?.player_stats?.movement_sprint_speed}}</li>
+            <li><b>Pase Corto: </b>{{player?.player_stats?.attacking_short_passing}}</li>
+            <li><b>Posicionamiento del Portero: </b>{{player?.player_stats?.goalkeeping_positioning}}</li>
+            <li><b>Intercepciones: </b>{{player?.player_stats?.mentality_interceptions}}</li>
+            <li><b>Barrida: </b>{{player?.player_stats?.defending_sliding_tackle}}</li>
+            <li><b>Entrada de Pie: </b>{{player?.player_stats?.defending_standing_tackle}}</li>
+            <li><b>Precisión de Cabeceo: </b>{{player?.player_stats?.attacking_heading_accuracy}}</li>
+            <li><b>Marcaje: </b>{{player?.player_stats?.defending_marking_awareness}}</li>
+        </ul>
+        <app-radar-chart></app-radar-chart>
+    }
+
+</div>

@@ -27,8 +27,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (playercs of this.playerCSCollection ;track $index) {
-                    <tr>
+                    @for (playercs of this.playerCSCollection; track $index) {
+                    <tr (click)="selectPlayer(playercs)">
                         <td>{{playercs.id}}</td>
                         <td>{{playercs.PlayerId}}</td>
                         <td>{{playercs.FifaVersionId}}</td>
@@ -46,5 +46,8 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="container">
+        <app-player-details></app-player-details>
     </div>
 </div>
