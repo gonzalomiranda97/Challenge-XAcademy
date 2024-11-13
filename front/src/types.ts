@@ -37,7 +37,7 @@ export type PlayerCS = {
     player_stats: Stats
     Player: {
         player_id: number,
-        short_name: String,
+        short_name: string,
         long_name: String,
         nationality_id: String,
         nationality_name: String,

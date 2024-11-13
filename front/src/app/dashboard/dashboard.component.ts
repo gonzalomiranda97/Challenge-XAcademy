@@ -14,6 +14,8 @@ import { PlayerDetailsService } from '../../services/playerDetails.service';
 })
 export class DashboardComponent {
 
+  viewStats: boolean = false
+
   selectedPlayer: PlayerCS | null = null
 
   playerCSCollection: PlayerCS[] = []
@@ -38,6 +40,15 @@ export class DashboardComponent {
   selectPlayer(player: PlayerCS) {
     this.selectedPlayer = player
     this.playerDetailsService.selectPlayer(player)
+    console.log(this.viewStats)
+    if (this.viewStats) {
+      this.viewStats = !this.viewStats
+    }
+    console.log(this.viewStats)
+  }
+
+  viewChange(change: boolean) {
+    this.viewStats = change
   }
 
   

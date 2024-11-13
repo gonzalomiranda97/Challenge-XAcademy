@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnChanges, OnInit } from '@angular/core';
-import {Chart, ChartConfiguration, Filler, Legend, LineElement, PointElement, RadarController, RadialLinearScale, Title, Tooltip } from 'chart.js'
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import {Chart, ChartConfiguration, Filler, Legend, LineElement, PointElement, RadarController, RadialLinearScale, Tooltip } from 'chart.js'
 import { PlayerCS, Stats } from '../../types';
 import { PlayerDetailsService } from '../../services/playerDetails.service';
 
@@ -29,7 +29,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
   player: PlayerCS | null = null
 
   constructor(private playerDetailsService: PlayerDetailsService) {
-    Chart.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend, Title, RadarController)
+    Chart.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend, RadarController)
 
   }
 
@@ -49,21 +49,21 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
       data: {
         labels: this.labels,
         datasets: [{
-          label: 'burro!',
+          label: this.player?.Player.short_name,
           data: this.extractStats(this.player?.player_stats!),
           fill: true,
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgb(255, 99, 132)',
-          pointBackgroundColor: 'rgb(255, 99, 132)',
-          pointBorderColor: '#fff',
+          backgroundColor: 'rgba(218, 165, 32, 0.2)',
+          borderColor: 'rgb(218, 165, 32)',
+          pointBackgroundColor: 'rgb(218, 165, 32)',
+          pointBorderColor: 'rgb(0, 0, 0)',
           pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgb(255, 99, 132)'
+          pointHoverBorderColor: 'rgb(0, 0, 0)'
         }]
       },
       options: {
         elements: {
           line: {
-            borderWidth: 2
+            borderWidth: 1
           }
         }
       }

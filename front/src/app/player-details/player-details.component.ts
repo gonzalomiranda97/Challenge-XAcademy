@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { PlayerCS } from '../../types';
 import { PlayerDetailsService } from '../../services/playerDetails.service';
 import { RadarChartComponent } from '../radar-chart/radar-chart.component';
@@ -14,7 +14,8 @@ export class PlayerDetailsComponent implements OnInit {
 
   player: PlayerCS | null = null
 
-  viewStats: boolean = false
+  @Input() viewStats: boolean | undefined
+  @Output() viewChange = new EventEmitter<boolean>()
 
   constructor(private playerDetailsService: PlayerDetailsService) {
 
@@ -27,13 +28,9 @@ export class PlayerDetailsComponent implements OnInit {
   }
 
   showStats() {
-    if (!this.viewStats) {
-      this.viewStats = true
-    } else {
-      this.viewStats = false
-    }
+    this.viewStats = !this.viewStats
+    this.viewChange.emit(this.viewStats)
+    console.log(this.viewStats)
   }
-
-
 
 }
