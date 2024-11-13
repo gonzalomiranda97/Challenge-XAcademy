@@ -10,4 +10,13 @@ const getVersionByYear = async (req, res, next) => {
 
 }
 
-module.exports = {getVersionByYear}
+const fifaVersionExists = async (req, res, next) => {
+    try {
+        const exists = await fifaVersionService.fifaVersionExists(req.params.year)
+        res.status(200).json(exists)
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports = {getVersionByYear, fifaVersionExists}

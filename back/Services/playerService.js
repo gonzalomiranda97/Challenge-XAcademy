@@ -25,4 +25,16 @@ const getPlayerByName = async (name) => {
     }
 }
 
-module.exports = {getPlayerByName}
+const playerExists = async (id) => {
+    try {
+        const findPlayer = await playerModel.findByPk(id)
+        if (findPlayer) {
+            return true
+        }
+        return false
+    } catch (error) {
+        throw error
+    }
+}
+
+module.exports = {getPlayerByName, playerExists}

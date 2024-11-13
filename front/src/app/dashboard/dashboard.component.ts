@@ -4,11 +4,12 @@ import { PlayerCS } from '../../types';
 import { DashboardService } from '../../services/dashboard.service';
 import { PlayerDetailsComponent } from '../player-details/player-details.component';
 import { PlayerDetailsService } from '../../services/playerDetails.service';
+import { FormCreateComponent } from '../form-create/form-create.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ReactiveFormsModule, PlayerDetailsComponent],
+  imports: [ReactiveFormsModule, PlayerDetailsComponent, FormCreateComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

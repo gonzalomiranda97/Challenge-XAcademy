@@ -23,4 +23,16 @@ const getFifaByVersion = async (year) => {
     }
 }
 
-module.exports = {getFifaByVersion}
+const fifaVersionExists = async (year) => {
+    try {
+        const findVersion = await fifaVersionModel.findByPk(year)
+        if (findVersion) {
+            return true
+        }
+        return false
+    } catch (error) {
+        throw error
+    }
+}
+
+module.exports = {getFifaByVersion, fifaVersionExists}

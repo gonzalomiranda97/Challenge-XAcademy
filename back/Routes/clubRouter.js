@@ -5,5 +5,7 @@ const {clubController} = require('../Controllers')
 const {authMiddle} = require('../Middlewares')
 
 router.post('/', authMiddle.userIsAuth, clubController.getClubByName)
+router.get('/:id', clubController.getClubById)
+router.get('/:id/exists', clubController.clubExists)
 
 module.exports = router
