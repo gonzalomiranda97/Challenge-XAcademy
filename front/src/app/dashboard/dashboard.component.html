@@ -1,8 +1,16 @@
 <div>
     <div class="container flex">
         <form [formGroup]="searchByPlayerCSIdForm" (ngSubmit)="searchByPlayerCSId(this.searchByPlayerCSIdForm.controls.id.value!)">
+            <p>Buscar por id</p>
             <div>
                 <input type="text" class="input" placeholder="PlayerClubSeasonId" formControlName="id">
+                <button type="submit" class="search">Buscar</button>
+            </div>
+        </form>
+        <form [formGroup]="searchByPlayerNameForm" (ngSubmit)="searchByPlayerName(this.searchByPlayerNameForm.controls.name.value!)">
+            <p>Buscar por nombre de jugador</p>
+            <div>
+                <input type="text" class="input" placeholder="Nombre de jugador" formControlName="name">
                 <button type="submit" class="search">Buscar</button>
             </div>
         </form>

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { PlayerCS } from "../types";
+import { Player, PlayerCS } from "../types";
 import { lastValueFrom, take } from "rxjs";
 
 @Injectable({
@@ -22,5 +22,19 @@ export class DashboardService {
             throw error
         }
     }
+
+    async getPlayerByName(name: String) {
+        const body = {
+            long_name: name
+        }
+        try {
+            const findPlayers = this.http.post<Player[]>(`http://localhost:3000/api/player/`, body).pipe(take(1))
+            return await lastValueFrom(findPlayers)
+        } catch (error) {
+            throw error
+        }
+    }
+
+
     
 }

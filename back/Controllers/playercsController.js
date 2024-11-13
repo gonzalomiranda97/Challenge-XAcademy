@@ -27,4 +27,33 @@ const getPlayerCSByClubId = async (req, res, next) => {
     }
 }
 
-module.exports = {getPlayerCSById, getPlayerCSByPlayerId, getPlayerCSByClubId}
+const createPlayerCS = async (req, res, next) => {
+    try {
+        const {player, playercs} = req.body
+        const newPlayerCS = await playercsService.createPlayerCS(player, playercs)
+        res.status(200).json(newPlayerCS)
+    } catch (error) {
+        next(error)
+    }
+}
+const editPlayerCS = async (req, res, next) => {
+    try {
+        const {player, playercs} = req.body
+        const updatedPlayer = await playercsService.editPlayerCS(player, playercs)
+        res.status(200).json(updatedPlayer)
+    } catch (error) {
+        next(error)
+    }
+}
+
+const getPlayerCSByPositions = async (req, res, next) => {
+    try {
+        const {player_positions} = req.body
+        const findPlayer = await playercsService.getPlayerCSByPositions(player_positions)
+        res.status(200).json(findPlayer)
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports = {getPlayerCSById, getPlayerCSByPlayerId, getPlayerCSByClubId, createPlayerCS, editPlayerCS, getPlayerCSByPositions}

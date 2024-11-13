@@ -96,3 +96,14 @@ export type Stats = {
     attacking_heading_accuracy: number;
     defending_marking_awareness: number;
 }
+
+export type Player = {
+    player_id: number,
+    short_name: string,
+    long_name: String,
+    nationality_id: String,
+    nationality_name: String,
+    birth_date: String,
+    preferred_foot: String,
+    PlayerClubSeasons: []
+}

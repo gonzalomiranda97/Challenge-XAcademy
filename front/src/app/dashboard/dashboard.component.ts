@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { PlayerCS } from '../../types';
+import { Player, PlayerCS } from '../../types';
 import { DashboardService } from '../../services/dashboard.service';
 import { PlayerDetailsComponent } from '../player-details/player-details.component';
 import { PlayerDetailsService } from '../../services/playerDetails.service';
 import { FormCreateComponent } from '../form-create/form-create.component';
+import { PlayerToPlayerCS } from '../../formatFunctions';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,6 +26,10 @@ export class DashboardComponent {
     id: new FormControl('')
   })
 
+  searchByPlayerNameForm = new FormGroup({
+    name: new FormControl('')
+  })
+
   constructor(private dashboardService: DashboardService, private playerDetailsService: PlayerDetailsService) {
 
   }
@@ -35,6 +40,14 @@ export class DashboardComponent {
     .then( (data: PlayerCS) => {
       console.log(data)
       this.playerCSCollection.push(data)
+    })
+  }
+
+  async searchByPlayerName(name: String) {
+    await this.dashboardService.getPlayerByName(name)
+    .then( (data: Player[]) => {
+      console.log(data)
+      this.playerCSCollection = PlayerToPlayerCS(data)
     })
   }
 

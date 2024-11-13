@@ -1,4 +1,4 @@
-const {playerModel} = require('../Models')
+const {playerModel, playerClubSeasonModel, clubModel} = require('../Models')
 const {Op} = require('sequelize')
 
 const getPlayerByName = async (name) => {
@@ -9,9 +9,16 @@ const getPlayerByName = async (name) => {
                     [Op.like]: `%${name}%`
                 }
             },
-            include: {
-                all: true
-            }
+            include: [
+                {
+                    model: playerClubSeasonModel,
+                    include: [
+                        {
+                            model: clubModel
+                        }
+                    ]
+                }
+            ]
         })
         if (findPlayer.length === 0) {
             const error = new Error()

@@ -65,8 +65,18 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
           line: {
             borderWidth: 1
           }
+        },
+        scales: {
+          r: {
+            min: 0,
+            max: 99,
+            ticks: {
+              display: false
+            }
+          }
         }
       }
+
     }
     const ctx = (document.getElementById('radarChart') as HTMLCanvasElement).getContext('2d')
     if (ctx) {

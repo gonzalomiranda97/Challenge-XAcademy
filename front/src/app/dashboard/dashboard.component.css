@@ -9,6 +9,15 @@
     display: flex;
 }
 
+.flex p {
+    font-size: medium;
+    color: goldenrod
+}
+
+form {
+    margin-right: 15px;
+}
+
 .input {
     border: 1px solid white;
     width: 15em;
