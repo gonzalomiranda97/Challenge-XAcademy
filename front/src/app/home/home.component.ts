@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Se creo el componente home')
     this.user = this.loginService.getCurrentUser()
 
   }

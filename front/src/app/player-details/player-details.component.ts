@@ -16,6 +16,7 @@ export class PlayerDetailsComponent implements OnInit {
 
   @Input() viewStats: boolean | undefined
   @Output() viewChange = new EventEmitter<boolean>()
+  @Output() opt = new EventEmitter<2>()
 
   constructor(private playerDetailsService: PlayerDetailsService) {
 
@@ -30,7 +31,10 @@ export class PlayerDetailsComponent implements OnInit {
   showStats() {
     this.viewStats = !this.viewStats
     this.viewChange.emit(this.viewStats)
-    console.log(this.viewStats)
   }
 
+  editPlayerOpt() {
+    this.opt.emit(2)
+  }
+  
 }

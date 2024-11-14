@@ -3,19 +3,37 @@
         <form [formGroup]="searchByPlayerCSIdForm" (ngSubmit)="searchByPlayerCSId(this.searchByPlayerCSIdForm.controls.id.value!)">
             <p>Buscar por id</p>
             <div>
-                <input type="text" class="input" placeholder="PlayerClubSeasonId" formControlName="id">
+                <input type="number" class="input" placeholder="PlayerClubSeasonId" formControlName="id">
                 <button type="submit" class="search">Buscar</button>
             </div>
         </form>
-        <form [formGroup]="searchByPlayerNameForm" (ngSubmit)="searchByPlayerName(this.searchByPlayerNameForm.controls.name.value!)">
-            <p>Buscar por nombre de jugador</p>
+        <form [formGroup]="searchByPlayerNameForm" (ngSubmit)="searchByPlayerName(this.searchByPlayerNameForm.get('name')!.value)">
+            <p>Buscar por Nombre de jugador</p>
             <div>
                 <input type="text" class="input" placeholder="Nombre de jugador" formControlName="name">
                 <button type="submit" class="search">Buscar</button>
             </div>
         </form>
+        <form [formGroup]="searchByClubNameForm" (ngSubmit)="searchByClubName(this.searchByClubNameForm.get('name')!.value)">
+            <p>Buscar por Nombre de club</p>
+            <div>
+                <input type="text" class="input" placeholder="Nombre de Club" formControlName="name">
+                <button type="submit" class="search">Buscar</button>
+            </div>
+        </form>
+        <form [formGroup]="searchByPlayerPositionsForm" (ngSubmit)="searchByPlayerPositions(this.searchByPlayerPositionsForm.get('positions')!.value)">
+            <p>Buscar por Posición de jugador</p>
+            <div>
+                <input type="text" class="input" placeholder="Posición de jugador" formControlName="positions">
+                <button type="submit" class="search">Buscar</button>
+            </div>
+        </form>
     </div>
     <div class="container">
+        <div class="div-ontable">
+            <button class="butt" (click)="cleanTable()">Limpiar tabla</button>
+            <button class="butt" (click)="createPlayerOpt()">Crear jugador</button>
+        </div>
         <div class="table-container">
             <table class="styled-table">
                 <thead>
@@ -56,8 +74,14 @@
         </div>
     </div>
     <div class="container">
-        <app-player-details [viewStats]="this.viewStats" (viewChange)="this.viewChange($event)"></app-player-details>
+        @if (opt == 0) {
+            <app-player-details [viewStats]="this.viewStats" (viewChange)="this.viewChange($event)" (opt)="this.editPlayerOpt($event)"></app-player-details>
+        } @else if (opt == 1) {
+            <app-form-create></app-form-create>
+            <button class="butt2" (click)="createPlayerOpt()">Cancelar</button>
+        } @else {
+            <app-edit-form></app-edit-form>
+            <button class="butt2" (click)="editPlayerOpt(0)">Cancelar</button>
+        }
     </div>
-    <!-- probando form. mover de lugar -->
-    <app-form-create></app-form-create>
 </div>

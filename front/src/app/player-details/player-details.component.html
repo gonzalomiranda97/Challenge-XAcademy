@@ -2,7 +2,7 @@
     @if (player) {
         <h2>Detalles del jugador:</h2>
         <ul>
-            <li class="flex"><img src="{{player.player_face_url}}"></li>
+            <li><img src="{{player.player_face_url}}"></li>
             <li><b>Id: </b>{{player.id}}</li>
             <li><b>Versión de fifa: </b>{{player.FifaVersionId}}</li>
             <li><b>Id del jugador: </b>{{player.PlayerId}}</li>
@@ -41,10 +41,15 @@
             <li><b>Nacionalidad: </b>{{player.Player.nationality_name}}</li>
             <li><b>Fecha de nacimiento: </b>{{player.Player.birth_date}}</li>
             <li><b>Pie preferido: </b>{{player.Player.preferred_foot}}</li>
-            <li (click)="this.showStats()"><b>+ Mostrar estadísticas</b></li>
+            @if (!this.viewStats) {
+                <li (click)="this.showStats()"><b>Mostrar estadísticas</b></li>
+            } @else {
+                <li (click)="this.showStats()"><b>Ocultar estadísticas</b></li>
+            }
+            <li><button class="butt" (click)="this.editPlayerOpt()">Editar jugador</button></li>
         </ul>
     } @else {
-        <h3>No hay un jugador seleccionado aún. Apretá en alguno!</h3>
+        <h3>No hay un jugador seleccionado aún.</h3>
     }
     @if (this.viewStats) {
         <h2>Estadísticas del jugador: </h2>

@@ -1,4 +1,4 @@
-import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms'
+import { AbstractControl, AsyncValidatorFn, ValidationErrors, ValidatorFn } from '@angular/forms'
 import { catchError, map, Observable, of } from 'rxjs'
 import {ModelService} from './services/models.service'
 
@@ -14,7 +14,7 @@ export function clubExistsValidator(modelService: ModelService): AsyncValidatorF
     }   
 }
 
-export function fifaVersionValidator(modelService: ModelService): AsyncValidatorFn {
+export function fifaVersionExistsValidator(modelService: ModelService): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
         return modelService.fifaVersionExists(control.value).pipe(
             map(exists => (exists ? null : {fifaVersionNotFound: true})),
@@ -23,7 +23,7 @@ export function fifaVersionValidator(modelService: ModelService): AsyncValidator
     }   
 }
 
-export function playerValidator(modelService: ModelService): AsyncValidatorFn {
+export function playerExistsValidator(modelService: ModelService): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
         return modelService.playerExists(control.value).pipe(
             map(exists => (exists ? null : {playerNotFound: true})),
@@ -31,4 +31,21 @@ export function playerValidator(modelService: ModelService): AsyncValidatorFn {
         )
     }   
 }
+
+export function playerNotExistsValidator(modelService: ModelService): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+        return modelService.playerExists(control.value).pipe(
+            map(exists => (exists ? {playerAlreadyExists: true} : null)),
+            catchError(() => of(null))
+        )
+    }   
+}
+
+// Validador personalizado para evitar strings vacios o solo espacios en blanco
+export function nonEmptyStringValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const isValid = control.value && control.value.trim().length > 0;
+      return isValid ? null : { nonEmptyString: true };
+    };
+  }
 

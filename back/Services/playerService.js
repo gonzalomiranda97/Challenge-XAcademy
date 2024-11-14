@@ -18,7 +18,7 @@ const getPlayerByName = async (name) => {
                         }
                     ]
                 }
-            ]
+            ],
         })
         if (findPlayer.length === 0) {
             const error = new Error()

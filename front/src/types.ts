@@ -107,3 +107,12 @@ export type Player = {
     preferred_foot: String,
     PlayerClubSeasons: []
 }
+
+export type Club = {
+    league_id: String,
+    league_name: String,
+    league_level: number,
+    club_id: number
+    club_name: String,
+    PlayerClubSeasons: []
+}

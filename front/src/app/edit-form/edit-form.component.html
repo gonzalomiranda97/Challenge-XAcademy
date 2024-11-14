@@ -1,6 +1,6 @@
 <div>
-    <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
-        <h2>Crear jugador: </h2>
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <h2>Editar jugador: </h2>
 
         <h3>Player</h3>
         <input class="input" type="text" placeholder="Id del jugador nuevo" id="player_id" formControlName="player_id">
@@ -10,6 +10,7 @@
         <input class="input" type="text" placeholder="Nombre Nacionalidad" id="nationality_name" formControlName="nationality_name">
         <input class="input" type="text" placeholder="Fecha de nacimiento" id="birth_date" formControlName="birth_date">
         <input class="input" type="text" placeholder="Pie preferido" id="preferred_foot" formControlName="preferred_foot">
+
 
         <h3>Player Club Season</h3>
         <input class="input" type="text" placeholder="ID Versión FIFA" id="FifaVersionId" formControlName="FifaVersionId">
@@ -39,6 +40,7 @@
         <input class="input" type="text" placeholder="Etiquetas del jugador" id="player_tags" formControlName="player_tags">
         <input class="input" type="text" placeholder="Rasgos del jugador" id="player_traits" formControlName="player_traits">
         <input class="input" type="url" placeholder="URL de la cara del jugador" id="player_face_url" formControlName="player_face_url">
+
 
         <h3>Stats</h3>
         <input class="input" type="number" placeholder="Ritmo" id="pace" formControlName="pace">
@@ -82,6 +84,6 @@
         <input class="input" type="number" placeholder="Precisión de cabezazos" id="attacking_heading_accuracy" formControlName="attacking_heading_accuracy">
         <input class="input" type="number" placeholder="Marcaje" id="defending_marking_awareness" formControlName="defending_marking_awareness">
 
-        <button class="submit" type="submit">Crear</button>
+        <button class="submit" type="submit">Confirmar</button>
     </form>
 </div>

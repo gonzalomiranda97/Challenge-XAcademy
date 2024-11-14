@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Player, PlayerCS } from "../types";
+import { Club, Player, PlayerCS } from "../types";
 import { lastValueFrom, take } from "rxjs";
 
 @Injectable({
@@ -23,12 +23,36 @@ export class DashboardService {
         }
     }
 
-    async getPlayerByName(name: String) {
+    async getPlayersByName(name: String) {
         const body = {
             long_name: name
         }
         try {
             const findPlayers = this.http.post<Player[]>(`http://localhost:3000/api/player/`, body).pipe(take(1))
+            return await lastValueFrom(findPlayers)
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async getPlayersByClubName(name: String) {
+        const body = {
+            club_name: name
+        }
+        try {
+            const findPlayers = this.http.post<Club[]>(`http://localhost:3000/api/club`, body).pipe(take(1))
+            return await lastValueFrom(findPlayers)
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async getPlayerByPositions(positions: String) {
+        const body = {
+            player_positions: positions
+        }
+        try {
+            const findPlayers = this.http.post<PlayerCS[]>(`http://localhost:3000/api/playercs/position`, body).pipe(take(1))
             return await lastValueFrom(findPlayers)
         } catch (error) {
             throw error

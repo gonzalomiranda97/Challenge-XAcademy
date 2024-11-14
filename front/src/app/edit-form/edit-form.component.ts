@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModelService } from '../../services/models.service';
-import { clubExistsValidator, fifaVersionExistsValidator, nonEmptyStringValidator, playerNotExistsValidator} from '../../validators';
+import { clubExistsValidator, fifaVersionExistsValidator, nonEmptyStringValidator, playerExistsValidator} from '../../validators';
 
 @Component({
-  selector: 'app-form-create',
+  selector: 'app-edit-form',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './form-create.component.html',
-  styleUrl: './form-create.component.css'
+  templateUrl: './edit-form.component.html',
+  styleUrl: './edit-form.component.css'
 })
-export class FormCreateComponent {
+export class EditFormComponent {
 
-  createForm: FormGroup;
+  editForm: FormGroup;
 
   constructor(private fb: FormBuilder, private modelService: ModelService) {
-    this.createForm = this.fb.group({
+    this.editForm = this.fb.group({
       // playerModel
-      player_id: ['', [Validators.required, nonEmptyStringValidator], [playerNotExistsValidator(this.modelService)]],
+      player_id: ['', [Validators.required, nonEmptyStringValidator], playerExistsValidator(this.modelService)],
       short_name: ['', [Validators.required, nonEmptyStringValidator]],
       long_name: ['', [Validators.required, nonEmptyStringValidator]],
       nationality_id: ['', [Validators.required, nonEmptyStringValidator]],
@@ -99,7 +99,7 @@ export class FormCreateComponent {
   }
 
   onSubmit() {
-    if (this.createForm.valid) {
+    if (this.editForm.valid) {
       console.log('Formulario valido.')
     } else {
       console.log('Formulario invalido.')

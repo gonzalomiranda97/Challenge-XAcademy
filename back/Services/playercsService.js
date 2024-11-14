@@ -104,7 +104,8 @@ const getPlayerCSByPositions = async (positions) => {
             },
             include: {
                 all: true
-            }
+            },
+            limit: 5000
         })
         if (findPlayerCS.length === 0) {
             const error = new Error()
