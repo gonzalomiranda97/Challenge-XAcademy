@@ -44,6 +44,7 @@ export class RadarChartComponent implements OnInit, AfterViewInit {
   }
 
   createRadar() {
+    console.log(this.player?.player_stats)
     const config: ChartConfiguration = {
       type: 'radar',
       data: {

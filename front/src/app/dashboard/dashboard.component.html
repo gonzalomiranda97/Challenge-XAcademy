@@ -77,10 +77,10 @@
         @if (opt == 0) {
             <app-player-details [viewStats]="this.viewStats" (viewChange)="this.viewChange($event)" (opt)="this.editPlayerOpt($event)"></app-player-details>
         } @else if (opt == 1) {
-            <app-form-create></app-form-create>
+            <app-form-create (opt)="this.editPlayerOpt($event)"></app-form-create>
             <button class="butt2" (click)="createPlayerOpt()">Cancelar</button>
         } @else {
-            <app-edit-form></app-edit-form>
+            <app-edit-form (opt)="this.editPlayerOpt($event)"></app-edit-form>
             <button class="butt2" (click)="editPlayerOpt(0)">Cancelar</button>
         }
     </div>

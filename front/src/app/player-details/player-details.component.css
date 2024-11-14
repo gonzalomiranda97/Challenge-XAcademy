@@ -25,6 +25,8 @@ li b {
 }
 
 img {
+    width: 130px;
+    height: 110px;
     padding: 3px;
     border-radius: 50px;
 }

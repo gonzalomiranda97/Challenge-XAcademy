@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModelService } from '../../services/models.service';
 import { clubExistsValidator, fifaVersionExistsValidator, nonEmptyStringValidator, playerNotExistsValidator} from '../../validators';
+import { reqCPlayer } from '../../types';
+import { formatCreateFormValues } from '../../formatFunctions';
 
 @Component({
   selector: 'app-form-create',
@@ -13,6 +15,8 @@ import { clubExistsValidator, fifaVersionExistsValidator, nonEmptyStringValidato
 export class FormCreateComponent {
 
   createForm: FormGroup;
+
+    @Output() opt = new EventEmitter()
 
   constructor(private fb: FormBuilder, private modelService: ModelService) {
     this.createForm = this.fb.group({
@@ -70,6 +74,7 @@ export class FormCreateComponent {
       movement_agility: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       movement_balance: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       power_long_shots: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
+      power_shot_power: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       attacking_volleys: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       goalkeeping_speed: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       skill_fk_accuracy: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
@@ -84,7 +89,7 @@ export class FormCreateComponent {
       mentality_penalties: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       goalkeeping_handling: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       goalkeeping_reflexes: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
-      mentality_aggresion: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
+      mentality_aggression: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       mentality_positioning: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       movement_acceleration: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       movement_sprint_speed: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
@@ -98,13 +103,24 @@ export class FormCreateComponent {
     })
   }
 
-  onSubmit() {
-    if (this.createForm.valid) {
-      console.log('Formulario valido.')
-    } else {
-      console.log('Formulario invalido.')
-    }
+  getFormattedFormValues() {
+    const formValues = {...this.createForm.value}
+    console.log(formValues)
+    const formatedValues: reqCPlayer = formatCreateFormValues(formValues)
+    return formatedValues
   }
 
-  
+  onSubmit() {
+    if (this.createForm.valid) {
+      console.log('Form valido')
+      const p: reqCPlayer = this.getFormattedFormValues()
+      this.modelService.createPlayer(p)
+      .then( (data) => {
+        console.log('Jugador creado.')
+        this.opt.emit(0)
+
+      })
+
+    }
+  }
 }

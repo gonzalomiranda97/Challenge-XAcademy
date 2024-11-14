@@ -31,6 +31,7 @@ export class PlayerDetailsComponent implements OnInit {
   showStats() {
     this.viewStats = !this.viewStats
     this.viewChange.emit(this.viewStats)
+    console.log(this.player?.player_stats)
   }
 
   editPlayerOpt() {

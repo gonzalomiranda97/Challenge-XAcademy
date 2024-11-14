@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ModelService } from '../../services/models.service';
 import { clubExistsValidator, fifaVersionExistsValidator, nonEmptyStringValidator, playerExistsValidator} from '../../validators';
 import { PlayerDetailsService } from '../../services/playerDetails.service';
-import { Player, PlayerCS, reqPlayer } from '../../types';
-import { formatFormValues } from '../../formatFunctions';
+import { PlayerCS, reqEPlayer} from '../../types';
+import { formatEditFormValues } from '../../formatFunctions';
 
 @Component({
   selector: 'app-edit-form',
@@ -18,6 +18,8 @@ export class EditFormComponent implements OnInit{
   editForm: FormGroup;
 
   player: PlayerCS | null = null
+
+  @Output() opt = new EventEmitter()
 
   constructor(private fb: FormBuilder, private modelService: ModelService, private playerDetailsService: PlayerDetailsService) {
     this.editForm = this.fb.group({
@@ -75,6 +77,7 @@ export class EditFormComponent implements OnInit{
       movement_agility: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       movement_balance: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       power_long_shots: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
+      power_shot_power: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       attacking_volleys: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       goalkeeping_speed: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       skill_fk_accuracy: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
@@ -125,19 +128,19 @@ export class EditFormComponent implements OnInit{
     const formValues = {...this.editForm.value}
     const id = this.player?.id
     console.log(formValues)
-    const formatedValues: reqPlayer = formatFormValues(id!, formValues)
+    const formatedValues: reqEPlayer = formatEditFormValues(id!, formValues)
     return formatedValues
   }
 
   onSubmit() {
     if (this.editForm.valid) {
       console.log('Formulario valido.')
-      const p: reqPlayer = this.getFormattedFormValues()
+      const p: reqEPlayer = this.getFormattedFormValues()
       console.log(p)
       this.modelService.editPlayer(p)
       .then( (data) => {
         console.log('Jugador editado.')
-        
+        this.opt.emit(0)
       })
     } else {
       console.log('Formulario invalido.')
