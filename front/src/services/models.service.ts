@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import {Injectable} from '@angular/core'
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable, take } from 'rxjs';
+import { Player, PlayerCS, reqPlayer } from '../types';
 
 @Injectable({
     providedIn: 'root'
@@ -23,6 +24,14 @@ export class ModelService {
         return this.http.get<boolean>(`http://localhost:3000/api/player/${playerId}/exists`)
     }
 
-    
+    async editPlayer(p: reqPlayer) {
+        const reqBody = {
+            player: p.player,
+            playercs: p.playercs
+        }
+        return await lastValueFrom(this.http.post('http://localhost:3000/api/playercs/edit', reqBody).pipe(take(1)))
+    }
+
+
 
 }

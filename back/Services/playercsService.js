@@ -80,10 +80,14 @@ const editPlayerCS = async (player, playercs) => {
     const transaction = await sequelize.transaction()
     try {
         await playerModel.update(player, {
-            where: {player_id: player.player_id}
+            where: {
+                player_id: player.player_id
+            }
         })
         await playerClubSeasonModel.update(playercs, {
-            where: {id: playercs.id}
+            where: {
+                id: playercs.id
+            }
         })
         await transaction.commit()
         const updatedPlayer = {player, playercs}

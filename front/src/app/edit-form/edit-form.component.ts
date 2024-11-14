@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModelService } from '../../services/models.service';
 import { clubExistsValidator, fifaVersionExistsValidator, nonEmptyStringValidator, playerExistsValidator} from '../../validators';
+import { PlayerDetailsService } from '../../services/playerDetails.service';
+import { Player, PlayerCS, reqPlayer } from '../../types';
+import { formatFormValues } from '../../formatFunctions';
 
 @Component({
   selector: 'app-edit-form',
@@ -10,11 +13,13 @@ import { clubExistsValidator, fifaVersionExistsValidator, nonEmptyStringValidato
   templateUrl: './edit-form.component.html',
   styleUrl: './edit-form.component.css'
 })
-export class EditFormComponent {
+export class EditFormComponent implements OnInit{
 
   editForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private modelService: ModelService) {
+  player: PlayerCS | null = null
+
+  constructor(private fb: FormBuilder, private modelService: ModelService, private playerDetailsService: PlayerDetailsService) {
     this.editForm = this.fb.group({
       // playerModel
       player_id: ['', [Validators.required, nonEmptyStringValidator], playerExistsValidator(this.modelService)],
@@ -84,7 +89,7 @@ export class EditFormComponent {
       mentality_penalties: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       goalkeeping_handling: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       goalkeeping_reflexes: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
-      mentality_aggresion: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
+      mentality_aggression: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       mentality_positioning: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       movement_acceleration: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       movement_sprint_speed: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
@@ -98,9 +103,42 @@ export class EditFormComponent {
     })
   }
 
+  ngOnInit(): void {
+    this.playerDetailsService.selectedPlayer$.subscribe( (data) => {
+      this.player = data
+    })
+    console.log(Object.entries(this.player!))
+    console.log(Object.entries(this.player?.player_stats!))
+    // Object.entries devuelve un array con pares clave-valor
+    Object.entries(this.player?.Player!).forEach( ([key, value]) => {
+      this.editForm.get(key)?.setValue(value)
+    })
+    Object.entries(this.player!).forEach( ([key, value]) => {
+      this.editForm.get(key)?.setValue(value)
+    })
+    Object.entries(this.player?.player_stats!).forEach( ([key, value]) => {
+      this.editForm.get(key)?.setValue(value)
+    })
+  }
+
+  getFormattedFormValues() {
+    const formValues = {...this.editForm.value}
+    const id = this.player?.id
+    console.log(formValues)
+    const formatedValues: reqPlayer = formatFormValues(id!, formValues)
+    return formatedValues
+  }
+
   onSubmit() {
     if (this.editForm.valid) {
       console.log('Formulario valido.')
+      const p: reqPlayer = this.getFormattedFormValues()
+      console.log(p)
+      this.modelService.editPlayer(p)
+      .then( (data) => {
+        console.log('Jugador editado.')
+        
+      })
     } else {
       console.log('Formulario invalido.')
     }

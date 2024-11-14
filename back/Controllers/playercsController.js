@@ -39,6 +39,8 @@ const createPlayerCS = async (req, res, next) => {
 const editPlayerCS = async (req, res, next) => {
     try {
         const {player, playercs} = req.body
+        console.log(player)
+        console.log(playercs)
         const updatedPlayer = await playercsService.editPlayerCS(player, playercs)
         res.status(200).json(updatedPlayer)
     } catch (error) {
