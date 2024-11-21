@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ModelService } from '../../services/models.service';
 import { clubExistsValidator, fifaVersionExistsValidator, nonEmptyStringValidator, playerExistsValidator} from '../../validators';
 import { PlayerDetailsService } from '../../services/playerDetails.service';
-import { PlayerCS, reqEPlayer} from '../../types';
+import { PlayerCS, reqPlayer} from '../../types';
 import { formatEditFormValues } from '../../formatFunctions';
 
 @Component({
@@ -24,7 +24,6 @@ export class EditFormComponent implements OnInit{
   constructor(private fb: FormBuilder, private modelService: ModelService, private playerDetailsService: PlayerDetailsService) {
     this.editForm = this.fb.group({
       // playerModel
-      player_id: ['', [Validators.required, nonEmptyStringValidator], playerExistsValidator(this.modelService)],
       short_name: ['', [Validators.required, nonEmptyStringValidator]],
       long_name: ['', [Validators.required, nonEmptyStringValidator]],
       nationality_id: ['', [Validators.required, nonEmptyStringValidator]],
@@ -33,33 +32,31 @@ export class EditFormComponent implements OnInit{
       preferred_foot: ['', [Validators.required, nonEmptyStringValidator]],
 
       //PlayerClubSeasonModel
-      FifaVersionId: ['', [Validators.required, nonEmptyStringValidator], fifaVersionExistsValidator(this.modelService)],
-      ClubId: ['', [Validators.required, nonEmptyStringValidator], clubExistsValidator(this.modelService)],
       player_positions: ['', [Validators.required, nonEmptyStringValidator]],
-      overall: ['', [Validators.required, nonEmptyStringValidator]],
-      potential: ['', [Validators.required, nonEmptyStringValidator]],
+      overall: ['', [Validators.required,  Validators.min(1), Validators.max(99)]],
+      potential: ['', [Validators.required,  Validators.min(1), Validators.max(99)]],
       value: ['', [Validators.required, nonEmptyStringValidator]],
       wage: ['', [Validators.required, nonEmptyStringValidator]],
       age: ['', [Validators.required, nonEmptyStringValidator]],
       height: ['', [Validators.required, nonEmptyStringValidator]],
       weight: ['', [Validators.required, nonEmptyStringValidator]],
-      club_position: ['', [Validators.required, nonEmptyStringValidator]],
-      club_jersey_number: ['', [Validators.required, nonEmptyStringValidator]],
-      club_loaned_from: ['', [Validators.required, nonEmptyStringValidator]],
-      club_joined_date: ['', [Validators.required, nonEmptyStringValidator]],
-      club_contract_until_year: ['', [Validators.required, nonEmptyStringValidator]],
-      nation_position: ['', [Validators.required, nonEmptyStringValidator]],
-      nation_jersey_number: ['', [Validators.required, nonEmptyStringValidator]],
-      weak_foot: ['', [Validators.required, nonEmptyStringValidator]],
-      skill_moves: ['', [Validators.required, nonEmptyStringValidator]],
-      international_reputation: ['', [Validators.required, nonEmptyStringValidator]],
+      club_position: [''],
+      club_jersey_number: [''],
+      club_loaned_from: [''],
+      club_joined_date: [''],
+      club_contract_until_year: [''],
+      nation_position: [''],
+      nation_jersey_number: [''],
+      weak_foot: ['', [Validators.required,  Validators.min(1), Validators.max(5)]],
+      skill_moves: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
+      international_reputation: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
       work_rate: ['', [Validators.required, nonEmptyStringValidator]],
       body_type: ['', [Validators.required, nonEmptyStringValidator]],
       real_face: ['', [Validators.required, nonEmptyStringValidator]],
-      release_clause: ['', [Validators.required, nonEmptyStringValidator]],
-      player_tags: ['', [Validators.required, nonEmptyStringValidator]],
-      player_traits: ['', [Validators.required, nonEmptyStringValidator]],
-      player_face_url: ['', [Validators.required, nonEmptyStringValidator]],
+      release_clause: [''],
+      player_tags: [''],
+      player_traits: [''],
+      player_face_url: [''],
 
       //Stats
       pace: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
@@ -126,16 +123,19 @@ export class EditFormComponent implements OnInit{
 
   getFormattedFormValues() {
     const formValues = {...this.editForm.value}
-    const id = this.player?.id
+    const player_id = this.player?.Player.player_id
+    const playercs_id = this.player?.id
     console.log(formValues)
-    const formatedValues: reqEPlayer = formatEditFormValues(id!, formValues)
+    console.log(player_id)
+    console.log(playercs_id)
+    const formatedValues: reqPlayer = formatEditFormValues(player_id!, playercs_id!, formValues)
     return formatedValues
   }
 
   onSubmit() {
     if (this.editForm.valid) {
       console.log('Formulario valido.')
-      const p: reqEPlayer = this.getFormattedFormValues()
+      const p: reqPlayer = this.getFormattedFormValues()
       console.log(p)
       this.modelService.editPlayer(p)
       .then( (data) => {

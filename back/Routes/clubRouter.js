@@ -3,9 +3,9 @@ const router = express.Router()
 
 const {clubController} = require('../Controllers')
 const {authMiddle} = require('../Middlewares')
-//authMiddle.userIsAuth
-router.post('/', clubController.getClubByName)
-router.get('/:id', clubController.getClubById)
+
+router.post('/', authMiddle.userIsAuth, clubController.getClubByName)
+router.get('/:id', authMiddle.userIsAuth, clubController.getClubById)
 router.get('/:id/exists', clubController.clubExists)
 
 module.exports = router

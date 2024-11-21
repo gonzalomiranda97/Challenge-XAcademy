@@ -31,7 +31,7 @@ const importData = async () => {
 
     await sequelize.sync({ force: true })
 
-    const stream = fs.createReadStream('../male_players.csv')
+    const stream = fs.createReadStream('./male_players.csv')
         .pipe(csv())
     
     stream.on('data', async (row) => {

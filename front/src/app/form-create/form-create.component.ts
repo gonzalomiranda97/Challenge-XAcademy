@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModelService } from '../../services/models.service';
 import { clubExistsValidator, fifaVersionExistsValidator, nonEmptyStringValidator, playerNotExistsValidator} from '../../validators';
-import { reqCPlayer } from '../../types';
+import { reqPlayer } from '../../types';
 import { formatCreateFormValues } from '../../formatFunctions';
 
 @Component({
@@ -33,30 +33,30 @@ export class FormCreateComponent {
       FifaVersionId: ['', [Validators.required, nonEmptyStringValidator], fifaVersionExistsValidator(this.modelService)],
       ClubId: ['', [Validators.required, nonEmptyStringValidator], clubExistsValidator(this.modelService)],
       player_positions: ['', [Validators.required, nonEmptyStringValidator]],
-      overall: ['', [Validators.required, nonEmptyStringValidator]],
-      potential: ['', [Validators.required, nonEmptyStringValidator]],
+      overall: ['', [Validators.required,  Validators.min(1), Validators.max(99)]],
+      potential: ['', [Validators.required,  Validators.min(1), Validators.max(99)]],
       value: ['', [Validators.required, nonEmptyStringValidator]],
       wage: ['', [Validators.required, nonEmptyStringValidator]],
       age: ['', [Validators.required, nonEmptyStringValidator]],
       height: ['', [Validators.required, nonEmptyStringValidator]],
       weight: ['', [Validators.required, nonEmptyStringValidator]],
-      club_position: ['', [Validators.required, nonEmptyStringValidator]],
-      club_jersey_number: ['', [Validators.required, nonEmptyStringValidator]],
-      club_loaned_from: ['', [Validators.required, nonEmptyStringValidator]],
-      club_joined_date: ['', [Validators.required, nonEmptyStringValidator]],
-      club_contract_until_year: ['', [Validators.required, nonEmptyStringValidator]],
-      nation_position: ['', [Validators.required, nonEmptyStringValidator]],
-      nation_jersey_number: ['', [Validators.required, nonEmptyStringValidator]],
-      weak_foot: ['', [Validators.required, nonEmptyStringValidator]],
-      skill_moves: ['', [Validators.required, nonEmptyStringValidator]],
-      international_reputation: ['', [Validators.required, nonEmptyStringValidator]],
+      club_position: [''],
+      club_jersey_number: [''],
+      club_loaned_from: [''],
+      club_joined_date: [''],
+      club_contract_until_year: [''],
+      nation_position: [''],
+      nation_jersey_number: [''],
+      weak_foot: ['', [Validators.required,  Validators.min(1), Validators.max(5)]],
+      skill_moves: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
+      international_reputation: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
       work_rate: ['', [Validators.required, nonEmptyStringValidator]],
       body_type: ['', [Validators.required, nonEmptyStringValidator]],
       real_face: ['', [Validators.required, nonEmptyStringValidator]],
-      release_clause: ['', [Validators.required, nonEmptyStringValidator]],
-      player_tags: ['', [Validators.required, nonEmptyStringValidator]],
-      player_traits: ['', [Validators.required, nonEmptyStringValidator]],
-      player_face_url: ['', [Validators.required, nonEmptyStringValidator]],
+      release_clause: [''],
+      player_tags: [''],
+      player_traits: [''],
+      player_face_url: [''],
 
       //Stats
       pace: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
@@ -106,14 +106,14 @@ export class FormCreateComponent {
   getFormattedFormValues() {
     const formValues = {...this.createForm.value}
     console.log(formValues)
-    const formatedValues: reqCPlayer = formatCreateFormValues(formValues)
+    const formatedValues: reqPlayer = formatCreateFormValues(formValues)
     return formatedValues
   }
 
   onSubmit() {
     if (this.createForm.valid) {
-      console.log('Form valido')
-      const p: reqCPlayer = this.getFormattedFormValues()
+      console.log('Formulario válido')
+      const p: reqPlayer = this.getFormattedFormValues()
       this.modelService.createPlayer(p)
       .then( (data) => {
         console.log('Jugador creado.')
@@ -121,6 +121,8 @@ export class FormCreateComponent {
 
       })
 
+    } else {
+      console.log('Formulario inválido.')
     }
   }
 }

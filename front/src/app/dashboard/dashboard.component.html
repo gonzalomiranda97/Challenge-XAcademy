@@ -28,11 +28,19 @@
                 <button type="submit" class="search">Buscar</button>
             </div>
         </form>
+        <form [formGroup]="searchByPlayerIdForm" (ngSubmit)="searchByPlayerId(this.searchByPlayerIdForm.get('player_id')!.value)">
+            <p>Buscar por PlayerId</p>
+            <div>
+                <input type="text" class="input" placeholder="PlayerId" formControlName="player_id">
+                <button type="submit" class="search">Buscar</button>
+            </div>
+        </form>
     </div>
     <div class="container">
         <div class="div-ontable">
             <button class="butt" (click)="cleanTable()">Limpiar tabla</button>
             <button class="butt" (click)="createPlayerOpt()">Crear jugador</button>
+            <button class="butt" (click)="exportPlayerCSCollection()">Exportar tabla</button>
         </div>
         <div class="table-container">
             <table class="styled-table">
@@ -79,9 +87,11 @@
         } @else if (opt == 1) {
             <app-form-create (opt)="this.editPlayerOpt($event)"></app-form-create>
             <button class="butt2" (click)="createPlayerOpt()">Cancelar</button>
-        } @else {
+        } @else if (opt == 2) {
             <app-edit-form (opt)="this.editPlayerOpt($event)"></app-edit-form>
             <button class="butt2" (click)="editPlayerOpt(0)">Cancelar</button>
+        } @else {
+            <app-timeline [playersCollection]="this.playerCSCollection"></app-timeline>
         }
     </div>
 </div>

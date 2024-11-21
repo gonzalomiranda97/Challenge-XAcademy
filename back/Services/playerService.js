@@ -44,4 +44,30 @@ const playerExists = async (id) => {
     }
 }
 
-module.exports = {getPlayerByName, playerExists}
+const getPlayerById = async (id) => {
+    try {
+        const findPlayer = await playerModel.findByPk(id, {
+            include: [
+                {
+                    model: playerClubSeasonModel,
+                    include: [
+                        {
+                            model: clubModel
+                        }
+                    ]
+                }
+            ]
+        })
+        if (!findPlayer) {
+            const error = new Error()
+            error.message = `Error al encontrar player con player_id=${id}`
+            error.statusCode = 404
+            throw error
+        }
+        return findPlayer
+    } catch (error) {
+        throw error
+    }
+}
+
+module.exports = {getPlayerByName, playerExists, getPlayerById}

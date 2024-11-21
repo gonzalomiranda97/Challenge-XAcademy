@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import {Injectable} from '@angular/core'
 import { lastValueFrom, Observable, take } from 'rxjs';
-import { reqCPlayer, reqEPlayer} from '../types';
+import {reqPlayer} from '../types';
+import { LoginService } from './login.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ModelService {
     
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private loginService: LoginService) {
 
     }
 
@@ -24,20 +25,22 @@ export class ModelService {
         return this.http.get<boolean>(`http://localhost:3000/api/player/${playerId}/exists`)
     }
 
-    async editPlayer(p: reqEPlayer) {
+    async editPlayer(p: reqPlayer) {
         const reqBody = {
             player: p.player,
             playercs: p.playercs
         }
-        return await lastValueFrom(this.http.post('http://localhost:3000/api/playercs/edit', reqBody).pipe(take(1)))
+        const headers = this.loginService.getHeaders()
+        return await lastValueFrom(this.http.post('http://localhost:3000/api/playercs/edit', reqBody, {headers}).pipe(take(1)))
     }
 
-    async createPlayer(p: reqCPlayer) {
+    async createPlayer(p: reqPlayer) {
         const reqBody = {
             player: p.player,
             playercs: p.playercs
         }
-        return await lastValueFrom(this.http.post('http://localhost:3000/api/playercs/create', reqBody).pipe(take(1)))
+        const headers = this.loginService.getHeaders()
+        return await lastValueFrom(this.http.post('http://localhost:3000/api/playercs/create', reqBody, {headers}).pipe(take(1)))
     }
 
 }

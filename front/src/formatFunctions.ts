@@ -1,4 +1,4 @@
-import { Club, Player, PlayerCS, reqCPlayer, reqEPlayer} from "./types";
+import { Club, Player, PlayerCS, reqPlayer} from "./types";
 
 export function PlayerToPlayerCS(players: Player[]): PlayerCS[] {
     return players.flatMap( (p: Player) => {
@@ -106,10 +106,10 @@ export function ClubToPlayerCS(clubs: Club[]): PlayerCS[] {
     })
 }
 
-export function formatEditFormValues(id: number, data: any) {
-    const p: reqEPlayer = {
+export function formatEditFormValues(player_id: number, playercs_id: number, data: any) {
+    const p: reqPlayer = {
         player: {
-            player_id: data.player_id,
+            player_id: player_id,
             short_name: data.short_name,
             long_name: data.long_name,
             nationality_id: data.nationality_id,
@@ -118,10 +118,7 @@ export function formatEditFormValues(id: number, data: any) {
             preferred_foot: data.preferred_foot
         },
         playercs: {
-            id: id,
-            PlayerId: data.player_id,
-            FifaVersionId: data.FifaVersionId,
-            ClubId: data.ClubId,
+            id: playercs_id,
             player_positions: data.player_positions,
             overall: data.overall,
             potential: data.potential,
@@ -196,7 +193,7 @@ export function formatEditFormValues(id: number, data: any) {
 }
 
 export function formatCreateFormValues(data: any) {
-    const p: reqCPlayer = {
+    const p: reqPlayer = {
         player: {
             player_id: data.player_id,
             short_name: data.short_name,

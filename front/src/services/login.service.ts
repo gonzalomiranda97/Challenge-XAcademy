@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core'
-import {HttpClient} from '@angular/common/http'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {User} from '../types'
 import { lastValueFrom, take} from 'rxjs';
 
@@ -19,6 +19,18 @@ export class LoginService {
 
     getCurrentUser() {
         return this.currentUser
+    }
+
+    getUserToken() {
+        return this.currentUser?.token
+    }
+
+    getHeaders() {
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${this.getUserToken()}`,
+            'Content-Type': 'application/json'
+        })
+        return headers
     }
 
     setCurrentUser(user: User | null) {

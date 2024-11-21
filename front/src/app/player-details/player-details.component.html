@@ -42,9 +42,9 @@
             <li><b>Fecha de nacimiento: </b>{{player.Player.birth_date}}</li>
             <li><b>Pie preferido: </b>{{player.Player.preferred_foot}}</li>
             @if (!this.viewStats) {
-                <li (click)="this.showStats()"><b>Mostrar estadísticas</b></li>
+                <li class="showStats" (click)="this.showStats()"><b>Mostrar estadísticas</b></li>
             } @else {
-                <li (click)="this.showStats()"><b>Ocultar estadísticas</b></li>
+                <li class="showStats" (click)="this.showStats()"><b>Ocultar estadísticas</b></li>
             }
             <li><button class="butt" (click)="this.editPlayerOpt()">Editar jugador</button></li>
         </ul>

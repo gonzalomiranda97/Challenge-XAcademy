@@ -15,6 +15,11 @@ li {
     border-radius: 8px;
 }
 
+.showStats {
+    background-color: rgba(218, 165, 32, 0.15);
+    color: goldenrod
+}
+
 li:hover {
     background-color: rgb(55, 55, 55);
     border-color: goldenrod;

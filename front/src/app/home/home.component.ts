@@ -10,17 +10,6 @@ import { DashboardComponent } from "../dashboard/dashboard.component";
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
-
-  user: User | null = null
-
-  constructor(private loginService: LoginService) {
-
-  }
-
-  ngOnInit(): void {
-    this.user = this.loginService.getCurrentUser()
-
-  }
+export class HomeComponent {
 
 }

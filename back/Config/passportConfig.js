@@ -21,4 +21,16 @@ passport.use('jwt-user', new JWTStrategy(options, (jwtPayload, done) => {
     }
 }))
 
+passport.use('jwt-admin', new JWTStrategy(options, (jwtPayload, done) => {
+    try {
+        if (jwtPayload.role === 'admin') {
+            console.log(jwtPayload)
+            return done(null, jwtPayload)
+        }
+        return done(null, false)
+    } catch (error) {
+        return done(error, false)
+    }
+}))
+
 module.exports = passport

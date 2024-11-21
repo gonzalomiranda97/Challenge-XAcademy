@@ -21,4 +21,13 @@ const playerExists = async (req, res, next) => {
     }
 }
 
-module.exports = {getPlayerByName, playerExists}
+const getPlayerById = async (req, res, next) => {
+    try {
+        const findPlayer = await playerService.getPlayerById(req.params.player_id)
+        res.status(200).json(findPlayer)
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports = {getPlayerByName, playerExists, getPlayerById}

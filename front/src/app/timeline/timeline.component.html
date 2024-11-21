@@ -1,0 +1,15 @@
+<div>
+    <form [formGroup]="selectStatToTimelineForm" (ngSubmit)="selectStatToTimeline(this.selectStatToTimelineForm.get('stat')!.value)" >
+        <p>Seleccionar stat a visualizar</p>
+        <div>
+            <input type="number" class="input" placeholder="Stat" formControlName="stat">
+            <button type="submit" class="search">Visualizar</button>
+        </div>
+    </form>
+    <ul>
+        asdasdassd
+    </ul>
+    @if (this.viewTimeline) {
+        <app-timeline-chart [timelineData]="this.timelineData" [playerName]="this.playerName"></app-timeline-chart>   
+    }
+</div>
